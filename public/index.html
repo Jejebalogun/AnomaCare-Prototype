@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FF4D4D"> <!-- PWA theme -->
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="animations.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <title>AnomaCare</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <img src="assets/anoma logo.png" alt="Heart Icon" class="logo-icon">
+      <span class="logo-text">AnomaCare</span>
+    </div>
+    <nav class="nav desktop-nav">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#for-patients">For Patients</a>
+      <a href="#for-donors">For Donors</a>
+      <a href="#about">About Anoma</a>
+    </nav>
+    <div class="desktop-cta">
+      <button class="btn secondary-btn">Become a Donor</button>
+      <button class="btn primary-btn">Declare Your Intent</button>
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle Menu">
+      <img src="assets/mage.png" alt="Menu" class="menu-icon">
+    </button>
+    <nav class="nav mobile-nav hidden">
+      <a href="#how-it-works">How It Works</a>
+      <a href="#for-patients">For Patients</a>
+      <a href="#for-donors">For Donors</a>
+      <a href="#about">About Anoma</a>
+      <div class="mobile-cta">
+        <button class="btn secondary-btn">Become a Donor</button>
+        <button class="btn primary-btn">Declare Your Intent</button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Simple Hero with Three.js -->
+  <section class="simple-hero">
+    <div class="hero-content">
+      <div class="badge">
+        <img src="assets/power-on.png" alt="Heart" class="badge-icon">
+        <span>Powered by Anoma Blockchain</span>
+      </div>
+      <h1>
+        Your Health, <span class="anoma-text-gradient-1">Your Intent</span><br>Matched Globally
+      </h1>
+      <p>
+        Revolutionary healthcare coordination platform that uses intent-centric blockchain technology 
+        to connect patients with donors, healthcare providers, and resources worldwide.
+      </p>
+      <div class="cta-buttons">
+        <button class="btn primary-btn">Declare Your Intent <img src="assets/mage.png" alt="Arrow" class="btn-icon"></button>
+        <button class="btn secondary-btn">Learn How It Works</button>
+      </div>
+      <div class="stats">
+        <div><span class="stat-value">24/7</span><span class="stat-label">Global Matching</span></div>
+        <div><span class="stat-value">100%</span><span class="stat-label">Transparent</span></div>
+        <div><span class="stat-value">∞</span><span class="stat-label">Possibilities</span></div>
+      </div>
+    </div>
+    <div id="threejs-container"></div> <!-- Container for 3D animation -->
+  </section>
+
+  <!-- How It Works -->
+  <section id="how-it-works" class="how-it-works">
+    <div class="how-content">
+      <h2>How AnomaCare Works</h2>
+      <p>
+        Our intent-centric platform automates the complex process of healthcare coordination, 
+        connecting those in need with those who can help through blockchain technology.
+      </p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <img src="assets/mage.png" alt="File Text" class="step-icon">
+          <h3>Declare Your Intent</h3>
+          <p>Patients or families submit their medical needs through our simple, secure form. Specify your condition, location, funding requirements, and urgency.</p>
+          <div class="example">Example: "I need a compatible kidney donor within Lagos, Nigeria + $15,000 for transplant within 30 days."</div>
+        </div>
+        <div class="step">
+          <div class="step-number">2</div>
+          <img src="assets/search.png" alt="Search" class="step-icon">
+          <h3>AI-Powered Matching</h3>
+          <p>Our Anoma-powered solver network searches across medical registries, donor databases, and funding sources to find optimal matches.</p>
+          <div class="example">Example: "System searches donor registries, charities, DAOs, and individual donors globally."</div>
+        </div>
+        <div class="step">
+          <div class="step-number">3</div>
+          <img src="assets/give-love.png" alt="Hand Heart" class="step-icon">
+          <h3>Community Response</h3>
+          <p>Donors, healthcare providers, and organizations respond to matched intents. Multiple parties can contribute to fulfill complex medical needs.</p>
+          <div class="example">Example: "10 donors pool $15,000 while compatible donor is found in nearby region."</div>
+        </div>
+        <div class="step">
+          <div class="step-number">4</div>
+          <img src="assets/check.png" alt="Check Circle" class="step-icon">
+          <h3>Secure Execution</h3>
+          <p>When all requirements are met, the blockchain automatically executes the coordinated transaction, ensuring transparency and trust.</p>
+          <div class="example">Example: "Funds released to hospital, donor contacted, surgery scheduled - all parties notified."</div>
+        </div>
+      </div>
+      <div class="real-example">
+        <h3>Real-World Impact: Kidney Transplant Case Study</h3>
+        <p>
+          A father in Lagos needed a kidney transplant for his child. Through AnomaCare, 
+          the intent was matched with a compatible donor in Abuja and funding from 15 global donors, 
+          coordinating with Lagos University Teaching Hospital - all completed in 18 days.
+        </p>
+        <div class="real-stats">
+          <div><span class="stat-value">18</span><span class="stat-label">Days to Match</span></div>
+          <div><span class="stat-value">15</span><span class="stat-label">Global Donors</span></div>
+          <div><span class="stat-value">100%</span><span class="stat-label">Success Rate</span></div>
+        </div>
+      </div>
+      <button class="btn primary-btn">Start Your Healthcare Journey <img src="assets/mage.png" alt="Arrow" class="btn-icon"></button>
+    </div>
+  </section>
+
+  <!-- Intent Declaration Form -->
+<section id="intent-form" class="intent-form">
+  <div class="intent-content">
+    <h2>Declare Your Intent</h2>
+    <p>Submit your medical needs to connect with donors and healthcare providers worldwide.</p>
+    <form id="intentForm" class="intent-form-container">
+      <div class="form-group">
+        <label for="condition">Medical Condition:</label>
+        <input type="text" id="condition" name="condition" required placeholder="e.g., Kidney Failure">
+      </div>
+      <div class="form-group">
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required placeholder="e.g., Lagos, Nigeria">
+      </div>
+      <div class="form-group">
+        <label for="funding">Funding Required ($):</label>
+        <input type="number" id="funding" name="funding" required placeholder="e.g., 15000">
+      </div>
+      <div class="form-group">
+        <label for="urgency">Urgency (days):</label>
+        <input type="number" id="urgency" name="urgency" required placeholder="e.g., 30">
+      </div>
+      <button type="submit" class="btn primary-btn">Submit Intent</button>
+    </form>
+    <div id="formMessage" class="form-message"></div>
+  </div>
+</section>
+
+<!-- Matching Status -->
+<section id="matching-status" class="matching-status">
+  <div class="status-content">
+    <h2>Matching Status</h2>
+    <p id="statusText">Initializing matching process...</p>
+  </div>
+</section>
+
+  <!-- Features -->
+  <section class="features">
+    <div class="features-content">
+      <h2>Revolutionary Healthcare Technology</h2>
+      <p>
+        Powered by Anoma's intent-centric blockchain, AnomaCare brings unprecedented 
+        capabilities to healthcare coordination and medical aid distribution.
+      </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon"><img src="assets/security.png" alt="Shield"></div>
+          <h3>Privacy-First Design</h3>
+          <p>Programmable data sovereignty ensures you control exactly what information is shared with whom, when, and how.</p>
+          <div class="highlight">HIPAA & GDPR Compliant</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><img src="assets/earth.png" alt="Globe"></div>
+          <h3>Global Reach</h3>
+          <p>Connect with donors, healthcare providers, and resources worldwide, breaking down geographical barriers to care.</p>
+          <div class="highlight">190+ Countries</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><img src="assets/lightning.png" alt="Zap"></div>
+          <h3>Instant Matching</h3>
+          <p>AI-powered intent solvers work 24/7 to find optimal matches for your medical needs in real-time.</p>
+          <div class="highlight">Sub-second Processing</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><img src="assets/eye-care.png" alt="Eye"></div>
+          <h3>Complete Transparency</h3>
+          <p>Every transaction is recorded on the blockchain, providing full transparency while protecting sensitive data.</p>
+          <div class="highlight">Immutable Records</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><img src="assets/profile.png" alt="Users"></div>
+          <h3>Community-Driven</h3>
+          <p>Built by the community, for the community. Decentralized governance ensures the platform serves everyone's needs.</p>
+          <div class="highlight">No Single Authority</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon"><img src="assets/clock.png" alt="Clock"></div>
+          <h3>Time-Sensitive Care</h3>
+          <p>Urgency-aware matching prioritizes critical cases and ensures time-sensitive medical needs are addressed first.</p>
+          <div class="highlight">Emergency Priority</div>
+        </div>
+      </div>
+      <div class="benefits-section">
+        <h3>Benefits for Everyone</h3>
+        <p>AnomaCare creates value for all participants in the healthcare ecosystem</p>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-icon"><img src="assets/doctor-visit.png" alt="Heart"></div>
+            <h4>For Patients</h4>
+            <ul>
+              <li>Simple intent declaration process</li>
+              <li>Global access to donors and providers</li>
+              <li>Real-time progress tracking</li>
+              <li>Privacy-protected medical records</li>
+              <li>No upfront costs or fees</li>
+            </ul>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon"><img src="assets/profile.png" alt="Users"></div>
+            <h4>For Donors</h4>
+            <ul>
+              <li>Direct impact on lives saved</li>
+              <li>Transparent fund allocation</li>
+              <li>Tax-deductible contributions</li>
+              <li>Global reach and accessibility</li>
+              <li>Verified recipient authenticity</li>
+            </ul>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon"><img src="assets/padlock.png" alt="Lock"></div>
+            <h4>For Providers</h4>
+            <ul>
+              <li>Streamlined patient coordination</li>
+              <li>Guaranteed payment processing</li>
+              <li>Reduced administrative overhead</li>
+              <li>Global patient network access</li>
+              <li>Compliance automation</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="tech-highlight">
+        <h3>Powered by Anoma Protocol</h3>
+        <p>
+          The first intent-centric blockchain designed for complex coordination problems. 
+          Anoma enables AnomaCare to solve healthcare challenges that were previously impossible 
+          to address through traditional technology.
+        </p>
+        <div class="tech-stats">
+          <div><span class="stat-value">Intent-Centric</span> <span class="stat-label">Architecture</span></div>
+          <div><span class="stat-value">Multi-Chain</span> <span class="stat-label">Compatibility</span></div>
+          <div><span class="stat-value">Zero-Knowledge</span> <span class="stat-label">Privacy</span></div>
+          <div><span class="stat-value">Decentralized</span> <span class="stat-label">Governance</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <img src="assets/anoma logo.png" alt="Heart Icon" class="logo-icon">
+          <span class="logo-text">AnomaCare</span>
+        </div>
+        <p>
+          Revolutionary healthcare coordination platform powered by Anoma blockchain technology. 
+          Connecting patients with donors and healthcare providers globally through intent-centric matching.
+        </p>
+        <div class="social-links">
+          <a href="#" aria-label="Twitter"><img src="assets/twitter.png" alt="Twitter"></a>
+          <a href="#" aria-label="GitHub"><img src="assets/github.png" alt="GitHub"></a>
+          <a href="#" aria-label="LinkedIn"><img src="assets/linkedin.png" alt="LinkedIn"></a>
+          <a href="#" aria-label="Email"><img src="assets/mail.png" alt="Email"></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <div>
+          <h3>Platform</h3>
+          <ul>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#for-patients">For Patients</a></li>
+            <li><a href="#for-donors">For Donors</a></li>
+            <li><a href="#for-providers">For Providers</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Technology</h3>
+          <ul>
+            <li><a href="#anoma">Anoma Protocol</a></li>
+            <li><a href="#intents">Intent Architecture</a></li>
+            <li><a href="#privacy">Privacy Features</a></li>
+            <li><a href="#security">Security</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="#docs">Documentation</a></li>
+            <li><a href="#api">API Reference</a></li>
+            <li><a href="#dev-guide">Developer Guide</a></li>
+            <li><a href="#community">Community</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#careers">Careers</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="newsletter-section">
+      <h3>Stay Updated</h3>
+      <p>Get the latest updates on AnomaCare development and healthcare innovation.</p>
+      <div class="newsletter-form">
+        <input type="email" placeholder="Enter your email" class="email-input">
+        <button class="btn primary-btn">Subscribe</button>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-info">
+        <span>© 2024 AnomaCare. All rights reserved.</span>
+        <a href="#privacy">Privacy Policy</a>
+        <a href="#terms">Terms of Service</a>
+        <a href="#cookies">Cookie Policy</a>
+      </div>
+      <div class="footer-slogan">
+        <img src="assets/earth.png" alt="Globe" class="globe-icon">
+        <span>Built with  by Theprodigy for global healthcare</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
