@@ -125,40 +125,59 @@
   </section>
 
   <!-- Intent Declaration Form -->
-<section id="intent-form" class="intent-form">
-  <div class="intent-content">
-    <h2>Declare Your Intent</h2>
-    <p>Submit your medical needs to connect with donors and healthcare providers worldwide.</p>
-    <form id="intentForm" class="intent-form-container">
-      <div class="form-group">
-        <label for="condition">Medical Condition:</label>
-        <input type="text" id="condition" name="condition" required placeholder="e.g., Kidney Failure">
-      </div>
-      <div class="form-group">
-        <label for="location">Location:</label>
-        <input type="text" id="location" name="location" required placeholder="e.g., Lagos, Nigeria">
-      </div>
-      <div class="form-group">
-        <label for="funding">Funding Required ($):</label>
-        <input type="number" id="funding" name="funding" required placeholder="e.g., 15000">
-      </div>
-      <div class="form-group">
-        <label for="urgency">Urgency (days):</label>
-        <input type="number" id="urgency" name="urgency" required placeholder="e.g., 30">
-      </div>
-      <button type="submit" class="btn primary-btn">Submit Intent</button>
-    </form>
-    <div id="formMessage" class="form-message"></div>
-  </div>
-</section>
+  <section id="intent-form" class="intent-form">
+    <div class="intent-content">
+      <h2>Declare Your Intent</h2>
+      <p>Submit your medical needs to connect with donors and healthcare providers worldwide.</p>
+      <form id="intentForm" class="intent-form-container">
+        <div class="form-group">
+          <label for="condition">Medical Condition:</label>
+          <input type="text" id="condition" name="condition" required placeholder="e.g., Kidney Failure">
+          <span id="conditionError" class="error">Please enter a condition.</span>
+        </div>
+        <div class="form-group">
+          <label for="location">Location:</label>
+          <input type="text" id="location" name="location" required placeholder="e.g., Lagos, Nigeria">
+          <span id="locationError" class="error">Please enter a location.</span>
+        </div>
+        <div class="form-group">
+          <label for="funding">Funding Required ($):</label>
+          <input type="number" id="funding" name="funding" required placeholder="e.g., 15000" min="0">
+          <span id="fundingError" class="error">Please enter a valid amount (positive number).</span>
+        </div>
+        <div class="form-group">
+          <label for="urgency">Urgency (days):</label>
+          <input type="number" id="urgency" name="urgency" required placeholder="e.g., 30" min="1">
+          <span id="urgencyError" class="error">Please enter a valid urgency (at least 1 day).</span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required placeholder="e.g., user@example.com">
+          <span id="emailError" class="error">Please enter a valid email address.</span>
+        </div>
+        <button type="submit" class="btn primary-btn">Submit Intent</button>
+      </form>
+      <div id="formMessage" class="form-message"></div>
+    </div>
+  </section>
 
-<!-- Matching Status -->
-<section id="matching-status" class="matching-status">
-  <div class="status-content">
-    <h2>Matching Status</h2>
-    <p id="statusText">Initializing matching process...</p>
+  <!-- Matching Status -->
+  <section id="matching-status" class="matching-status">
+    <div class="status-content">
+      <h2>Matching Status</h2>
+      <p id="statusText">Initializing matching process...</p>
+    </div>
+  </section>
+
+  <!-- Success Modal -->
+  <div id="successModal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Success!</h2>
+      <p>Your intent has been submitted and recorded on the mock blockchain. Matching is in progress.</p>
+      <button class="btn primary-btn modal-close-btn">OK</button>
+    </div>
   </div>
-</section>
 
   <!-- Features -->
   <section class="features">

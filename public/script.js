@@ -61,27 +61,84 @@ document.addEventListener('DOMContentLoaded', () => {
   const intentForm = document.getElementById('intentForm');
   const formMessage = document.getElementById('formMessage');
   const statusText = document.getElementById('statusText');
-  if (intentForm && formMessage && statusText) {
+  const successModal = document.getElementById('successModal');
+  const closeModal = document.querySelector('.close-modal');
+  const modalCloseBtn = document.querySelector('.modal-close-btn');
+
+  if (intentForm && formMessage && statusText && successModal) {
     intentForm.addEventListener('submit', function(e) {
       e.preventDefault();
+
+      // Get form values
       const condition = document.getElementById('condition').value.trim();
       const location = document.getElementById('location').value.trim();
       const funding = document.getElementById('funding').value;
       const urgency = document.getElementById('urgency').value.trim();
+      const email = document.getElementById('email').value.trim();
 
-      if (condition && location && funding && urgency) {
-        const message = `Intent submitted: ${condition} in ${location} with $${funding} needed within ${urgency} days.`;
-        formMessage.textContent = message + ' Matching in progress...';
+      // Validation
+      let isValid = true;
+      const errorElements = {
+        condition: document.getElementById('conditionError'),
+        location: document.getElementById('locationError'),
+        funding: document.getElementById('fundingError'),
+        urgency: document.getElementById('urgencyError'),
+        email: document.getElementById('emailError')
+      };
+
+      // Reset error messages
+      Object.values(errorElements).forEach(error => error.style.display = 'none');
+
+      if (!condition) {
+        errorElements.condition.style.display = 'block';
+        isValid = false;
+      }
+      if (!location) {
+        errorElements.location.style.display = 'block';
+        isValid = false;
+      }
+      if (!funding || funding <= 0) {
+        errorElements.funding.style.display = 'block';
+        isValid = false;
+      }
+      if (!urgency || urgency < 1) {
+        errorElements.urgency.style.display = 'block';
+        isValid = false;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errorElements.email.style.display = 'block';
+        isValid = false;
+      }
+
+      if (isValid) {
+        // Mock blockchain storage
+        const intent = {
+          condition,
+          location,
+          funding,
+          urgency,
+          email,
+          timestamp: new Date().toISOString()
+        };
+        let intents = JSON.parse(localStorage.getItem('anomaIntents')) || [];
+        intents.push(intent);
+        localStorage.setItem('anomaIntents', JSON.stringify(intents));
+
+        // Show success modal
+        successModal.classList.remove('hidden');
+
+        // Update form message
+        formMessage.textContent = 'Intent submitted successfully!';
         formMessage.style.color = '#28a745';
         intentForm.reset();
 
         // Update Matching Status
         let statusIndex = 0;
         const statuses = [
-          `${message} Initializing matching process...`,
-          `${message} Searching donor registries...`,
-          `${message} Analyzing funding sources...`,
-          `${message} Match found! Connecting parties...`
+          `Intent submitted: ${condition} in ${location} with $${funding} needed within ${urgency} days. Initializing matching process...`,
+          `Searching donor registries...`,
+          `Analyzing funding sources...`,
+          `Match found! Connecting parties...`
         ];
         const statusInterval = setInterval(() => {
           statusText.textContent = statuses[statusIndex];
@@ -89,9 +146,17 @@ document.addEventListener('DOMContentLoaded', () => {
           if (statusIndex === statuses.length - 1) clearInterval(statusInterval); // Stop after full cycle
         }, 3000);
       } else {
-        formMessage.textContent = 'Please fill all fields.';
+        formMessage.textContent = 'Please fix the errors in the form.';
         formMessage.style.color = '#dc3545';
       }
+    });
+
+    // Close modal
+    closeModal.addEventListener('click', () => {
+      successModal.classList.add('hidden');
+    });
+    modalCloseBtn.addEventListener('click', () => {
+      successModal.classList.add('hidden');
     });
   } else {
     console.error('Intent form or related elements not found');
