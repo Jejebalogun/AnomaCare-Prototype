@@ -111,46 +111,51 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (isValid) {
-        // Mock blockchain storage
-        const intent = {
-          condition,
-          location,
-          funding,
-          urgency,
-          email,
-          timestamp: new Date().toISOString()
-        };
-        let intents = JSON.parse(localStorage.getItem('anomaIntents')) || [];
-        intents.push(intent);
-        localStorage.setItem('anomaIntents', JSON.stringify(intents));
+        // Send intent to backend which will handle blockchain or persistent storage
+        const intent = { condition, location, funding, urgency, email, timestamp: new Date().toISOString() };
+        fetch('http://localhost:4000/api/intents', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(intent)
+        })
+          .then(res => res.json())
+          .then(data => {
+            if (data && data.success) {
+              // Show success modal
+              successModal.classList.remove('hidden');
+              formMessage.textContent = 'Intent submitted successfully!';
+              formMessage.style.color = '#28a745';
+              intentForm.reset();
 
-        // Show success modal
-        successModal.classList.remove('hidden');
-
-        // Update form message
-        formMessage.textContent = 'Intent submitted successfully!';
-        formMessage.style.color = '#28a745';
-        intentForm.reset();
-
-        // Update Matching Status
-        let statusIndex = 0;
-        const statuses = [
-          `Intent submitted: ${condition} in ${location} with $${funding} needed within ${urgency} days. Initializing matching process...`,
-          `Searching donor registries...`,
-          `Analyzing funding sources...`,
-          `Match found! Connecting parties...`
-        ];
-        const statusInterval = setInterval(() => {
-          statusText.textContent = statuses[statusIndex];
-          statusIndex = (statusIndex + 1) % statuses.length;
-          if (statusIndex === statuses.length - 1) clearInterval(statusInterval); // Stop after full cycle
-        }, 3000);
-      } else {
-        formMessage.textContent = 'Please fix the errors in the form.';
-        formMessage.style.color = '#dc3545';
-      }
-    });
-
+              // Update Matching Status
+              let statusIndex = 0;
+              const statuses = [
+                `Intent submitted: ${condition} in ${location} with $${funding} needed within ${urgency} days. Initializing matching process...`,
+                `Searching donor registries...`,
+                `Analyzing funding sources...`,
+                `Match found! Connecting parties...`
+              ];
+              const statusInterval = setInterval(() => {
+                statusText.textContent = statuses[statusIndex];
+                statusIndex += 1;
+                if (statusIndex >= statuses.length) clearInterval(statusInterval);
+              }, 3000);
+            } else {
+              formMessage.textContent = data.message || 'Submission failed. Try again.';
+              formMessage.style.color = '#dc3545';
+            }
+          })
+          .catch(err => {
+            console.error('Network/backend error:', err);
+            formMessage.textContent = 'Network error. Try again.';
+            formMessage.style.color = '#dc3545';
+          });
+       } else {
+         formMessage.textContent = 'Please fix the errors in the form.';
+         formMessage.style.color = '#dc3545';
+       }
+     });
+ 
     // Close modal
     closeModal.addEventListener('click', () => {
       successModal.classList.add('hidden');
